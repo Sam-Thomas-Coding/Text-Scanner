@@ -4,6 +4,10 @@ This is a text scanner. When ran, the .jar file searches for a Text.txt file in 
 
 I have provided the finished .jar file, a .bat file to run the .jar file easily, and a Text.txt file containing the bible as an example. Place these files in the same folder and run the batch file to test.
 
+Finally, I have included the Maven project file as a .zip, containing the java code in full, and some .txt files that are used in testing.
+
+
+
 ## Rules Defining a Word:
 
 Dates in the formats xx/xx/xxxx and xx/xx/xx are counted as a single word, as shown in the example.
@@ -17,6 +21,7 @@ Decimal points are counted towards the length of a number, as are commas, minus 
 & is counted as a 1-letter word.
 
 Punctuation is otherwise not counted towards the length of a word.
+
 
 
 ## Installation Instructions:
