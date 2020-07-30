@@ -37,12 +37,12 @@ public String scan(String fileName) throws IOException
 {
 	String r = "";	//the final result string
 	String dir = System.getProperty("user.dir");				//find the location of the project/jar file
-	String fileLoc;												//the full address, including the file name
+	String fileLoc;								//the full address, including the file name
 	
 	boolean isDefaultCase = fileName.equals("");
 	if (isDefaultCase)
 	{
-		fileLoc = dir + "\\Text.txt";							//if we scan without an argument, we use the Text.txt file in the same folder as the jar.
+		fileLoc = dir + "\\Text.txt";					//if we scan without an argument, we use the Text.txt file in the same folder as the jar.
 	}
 	else
 	{
@@ -51,21 +51,21 @@ public String scan(String fileName) throws IOException
 	
 
 	File file = new File(fileLoc);
-	Hashtable<Integer, Integer> hash = createHashtable(file);	//create a hash table of word lengths
-	int nKeys = hash.keySet().size();							//count the number of distinct keys in the hash table
+	Hashtable<Integer, Integer> hash = createHashtable(file);		//create a hash table of word lengths
+	int nKeys = hash.keySet().size();					//count the number of distinct keys in the hash table
 	
-	int[] countArray = getWordAndLetterCount(hash, nKeys);		//an array containing word and letter count
-	int wordCount = countArray[0];								//the total number of words
-	int letterCount = countArray[1];							//the total number of letters
+	int[] countArray = getWordAndLetterCount(hash, nKeys);			//an array containing word and letter count
+	int wordCount = countArray[0];						//the total number of words
+	int letterCount = countArray[1];					//the total number of letters
 	
 	r = r.concat("Word count = " + wordCount + "\n");			//add the global word count
 	
 	double avg = (double) letterCount / wordCount;				//compute average word length
 	avg = (double)Math.round(avg * 1000d) / 1000d;				//round to 3 decimal places
-	r = r.concat("Average word length = " + avg + "\n");		//add the average word length
+	r = r.concat("Average word length = " + avg + "\n");			//add the average word length
 	
-	r = addWordCounts(hash, nKeys, r);							//add the word counts
-	r = addMostFrequentLength(hash, nKeys, r);					//add the most frequent length(s)
+	r = addWordCounts(hash, nKeys, r);					//add the word counts
+	r = addMostFrequentLength(hash, nKeys, r);				//add the most frequent length(s)
 	
 	if (isDefaultCase)	//if we're running from a jar file and not testing, we want to write to a result file
 	{
@@ -89,21 +89,21 @@ private static Hashtable<Integer, Integer> createHashtable(File file)
 	{
 		while (scanner.hasNext())
 		{
-			String s = scanner.next();		//next string
-			s = s.replaceAll("[^a-zA-Z0-9&,./$£%-]", ""); 	//remove most special characters
+			String s = scanner.next();				//next string
+			s = s.replaceAll("[^a-zA-Z0-9&,./$Â£%-]", ""); 		//remove most special characters
 			
 			
 			boolean isDate = s.matches("[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]")
 				|| s.matches("[0-9][0-9]/[0-9][0-9]/[0-9][0-9]");
-			if (!isDate						//Excluding dates such as 10/12/1997, we'd like to count forward-slash
+			if (!isDate				//Excluding dates such as 10/12/1997, we'd like to count forward-slash
 			  && s.contains("/"))			//separated terms, such as black/white, as separate words.
 			{
-				String[] subStrings = s.split("/");		//split the string using / as a delimiter
-				int n = subStrings.length;				//there are n substrings in the array
+				String[] subStrings = s.split("/");	//split the string using / as a delimiter
+				int n = subStrings.length;		//there are n substrings in the array
 				for (int i=0;i<n;i++)		//for each substring, we compute the length and input into the hash table
 				{
 					int length = lengthWithoutPunctuation(subStrings[i]);
-					if (hash.putIfAbsent(length, 1) != null)	//if this is the first word of this length, putIfAbsent inputs "1" into the table and return null
+					if (hash.putIfAbsent(length, 1) != null)		//if this is the first word of this length, putIfAbsent inputs "1" into the table and return null
 					{
 						hash.compute(length, (key, val) -> val + 1);	//else, we increase the associated frequency by 1
 					}
@@ -205,7 +205,7 @@ private static String addWordCounts(Hashtable<Integer, Integer> hash, int nKeys,
 private static String addMostFrequentLength(Hashtable<Integer, Integer> hash, int nKeys, String r)
 {
 	Collection<Integer> values = hash.values();		//the collection of frequencies from the table
-	int max = Collections.max(values);				//get the highest frequency
+	int max = Collections.max(values);			//get the highest frequency
 	r = r.concat("The most frequently occuring word length is " + max + ", for word lengths of ");
 	
 	int keysCounted = 0;
