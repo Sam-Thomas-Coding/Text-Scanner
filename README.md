@@ -2,9 +2,9 @@
 
 This is a text scanner. When ran, the final .jar file searches for a Text.txt file in the same folder as it. If such a file exists, it outputs information about the file to the console and creates a Result.txt file with this information.
 
-I have provided the finished .jar file, a .bat file to run the .jar file easily, and a Text.txt file containing the bible as an example. Place these files in the same folder and run the batch file to test.
+I have provided the finished .jar file, a .bat file to run the .jar file easily, and a Text.txt file containing the bible as an example (see 'testing example'). Place these files in the same folder and run the batch file to test.
 
-Finally, I have included the Maven project file as a .zip, containing the java code in full, and some .txt files that are used in testing.
+Finally, I have included the Maven project file as a .zip, containing the java code in full, and some .txt files that are used in testing. Alternatively, I have provided the POM.xml file and the full src folder.
 
 
 
